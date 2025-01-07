@@ -8,16 +8,16 @@ In the fast-paced world of e-commerce, staying ahead means making decisions back
 
 ### 1. Data Gathering
 
-I sourced the dataset for this project from Kaggle, where it is available in a CSV format. The dataset is simulated and inspired by real-world e-commerce operations. It contains 8 interconnected tables:
+The dataset for this project was sourced from Kaggle, available in CSV format. It is simulated and inspired by real-world e-commerce operations. The dataset contains 8 interconnected tables:
 
-- Orders  
-- Order_items  
-- Products  
-- Customers  
-- Shippings  
-- Reviews  
-- Suppliers  
-- Payments  
+- **Orders**  
+- **Order_items**  
+- **Products**  
+- **Customers**  
+- **Shippings**  
+- **Reviews**  
+- **Suppliers**  
+- **Payments**  
 
 These tables allowed me to explore various aspects of an e-commerce business, from customer interactions to product details, providing a comprehensive foundation for analysis.
 
@@ -25,7 +25,7 @@ These tables allowed me to explore various aspects of an e-commerce business, fr
 
 ### 2. Data Modeling
 
-Data modeling was a key step in this project. To ensure the analysis aligned with the dataset's structure and the company's strategic needs, I carefully designed the data model using Lucidchart. 
+Data modeling was a key step in this project. To ensure the analysis aligned with the dataset's structure and the company's strategic needs, I carefully designed the data model using Lucidchart.
 
 The relationships were based on a combination of one-to-many and one-to-one structures, selected to maintain data integrity, optimize query performance, and support accurate joins. This structured approach provided a reliable foundation for all subsequent analyses and ensured the data was well-organized for business-critical insights.
 
@@ -46,26 +46,19 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
-
 ---
-### 4. Data Cleaning Process
 
+4. Data Cleaning Process
 Before diving into analysis, I ensured the data was clean, consistent, and ready for querying using SQL. Key steps included:
 
-- **Standardizing Text Data**: Ensured uniformity in columns like customer names and product categories using SQL functions such as `TRIM()` and `LOWER()`.  
-- **Removing Duplicates and Nulls**: Used SQL queries to identify and eliminate duplicate rows and handle missing values, maintaining data integrity.  
-- **Validating Relationships**: Verified primary and foreign key relationships across tables using SQL to ensure accurate joins and referential integrity.  
-
+Standardizing Text Data: Ensured uniformity in columns like customer names and product categories using SQL functions such as TRIM() and LOWER().
+Removing Duplicates and Nulls: Used SQL queries to identify and eliminate duplicate rows and handle missing values, maintaining data integrity.
+Validating Relationships: Verified primary and foreign key relationships across tables using SQL to ensure accurate joins and referential integrity.
 Using SQL for data cleaning allowed for precision and efficiency, ensuring the dataset was ready for detailed analysis and strategic decision-making.
 
+5. Exploratory Data Analysis (EDA)
+To become more familiar with the dataset and ensure its validity, I conducted exploratory data analysis (EDA). This involved:
 
----
-### 5. Exploratory Data Analysis (EDA)
-
-To better understand the dataset and ensure its validity, I conducted exploratory data analysis (EDA). This involved:
-
-- **Reviewing Distributions and Summary Statistics**: Analyzed key variables to gain insights into data patterns and trends.  
-- **Identifying Potential Outliers and Inconsistencies**: Detected anomalies in the data to ensure accuracy.  
-- **Validating Data Relationships**: Confirmed that the relationships between data points align with business logic and expectations.  
-
-This step provided a solid foundation for deeper insights and ensured the dataset was reliable for strategic decision-making.
+Reviewing distributions and summary statistics for key variables.
+Identifying potential outliers and inconsistencies.
+Validating data relationships to confirm the data aligns with business logic
