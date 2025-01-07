@@ -48,7 +48,8 @@ CREATE TABLE order_items (
 
 ---
 
-4. Data Cleaning Process
+**Data Cleaning Process**
+
 Before diving into analysis, I ensured the data was clean, consistent, and ready for querying using SQL. Key steps included:
 
 Standardizing Text Data: Ensured uniformity in columns like customer names and product categories using SQL functions such as TRIM() and LOWER().
