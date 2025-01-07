@@ -46,28 +46,47 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
----
-
----
-
-**4.Data Cleaning Process**
-
+## 4. Data Cleaning Process
 Before diving into analysis, I ensured the data was clean, consistent, and ready for querying using SQL. Key steps included:
 
-Standardizing Text Data: Ensured uniformity in columns like customer names and product categories using SQL functions such as TRIM() and LOWER().
-Removing Duplicates and Nulls: Used SQL queries to identify and eliminate duplicate rows and handle missing values, maintaining data integrity.
-Validating Relationships: Verified primary and foreign key relationships across tables using SQL to ensure accurate joins and referential integrity.
+- **Standardizing Text Data:** Ensured uniformity in columns like customer names and product categories using SQL functions such as `TRIM()` and `LOWER()`.
+- **Removing Duplicates and Nulls:** Used SQL queries to identify and eliminate duplicate rows and handle missing values, maintaining data integrity.
+- **Validating Relationships:** Verified primary and foreign key relationships across tables using SQL to ensure accurate joins and referential integrity.
+
 Using SQL for data cleaning allowed for precision and efficiency, ensuring the dataset was ready for detailed analysis and strategic decision-making.
 
 ---
 
-**5.Exploratory Data Analysis (EDA)**
-To become more familiar with the dataset and ensure its validity, I conducted exploratory data analysis (EDA). This involved:
+## 5. Exploratory Data Analysis (EDA)
+To become more familiar with the dataset and ensure its validity, I conducted exploratory data analysis. This involved:
 
-Reviewing distributions and summary statistics for key variables.
-Identifying potential outliers and inconsistencies.
-Validating data relationships to confirm the data aligns with business logic
+- Reviewing distributions and summary statistics for key variables.
+- Identifying potential outliers and inconsistencies.
+- Validating data relationships to confirm the data aligns with business logic.
 
 ---
 
+## 6. Analysis
+In this step, I focused on answering critical business questions that align with common industry challenges and my own experience. These questions were designed to address the most relevant insights for the business. Each question is backed by SQL queries, analyses, and actionable strategies.
 
+### 1. Top-Selling Products by Revenue
+**Question:** Which products generate the most revenue for the company?
+
+Our first question asks us to identify the top-selling products by total revenue. Understanding which products generate the most revenue helps the company prioritize inventory, refine pricing strategies, and plan targeted promotions.
+
+```sql
+SELECT  
+    p.product_name AS product_name,  
+    COUNT(o.order_id) AS quantity_sold,  
+    SUM(oi.total_sales) AS total_sale  
+FROM  
+    order_items oi  
+JOIN  
+    orders o ON o.order_id = oi.order_id  
+JOIN  
+    products p ON p.product_id = oi.product_id  
+GROUP BY  
+    p.product_name  
+ORDER BY  
+    total_sale DESC  
+LIMIT 10;
