@@ -108,7 +108,7 @@ The data shows a sharp increase in December 2023, likely due to holiday shopping
 
 ### 2.Revenue By Category 
 
-**How does each product category contribute to the company's total revenue?**
+How does each product category contribute to the company's total revenue?
 
 In the previous analysis, we broke down the products and highlighted the best-selling items. To provide deeper insight and understand the connection between product sales and their categories, I analyzed how each category contributes to the company’s overall revenue.
 Using this query, I calculated the total revenue for each category and its percentage contribution to the total. This breakdown is essential for making informed decisions about resource allocation, marketing, and inventory management.
@@ -132,5 +132,44 @@ As we can see, **Electronics** is the top-performing category, contributing 35.8
 **Accessories,** contributing 23.14%, shows consistent performance, likely from smaller, high-volume items. Compared to other categories, **Furniture** has the smallest share at 14.66%, though it still contributes to diversifying revenue streams.
 
 
+### 3.Best-Selling Categories by State
+
+Which state generates the highest revenue for each product category, and how much is the total sales within that state?
+
+We initially took a general look at revenue by category and observed that electronics had the highest sales.To explore this further, I wanted to break the data down by state and see which categories were selling the most in each one. I was curious to see if electronics would still be the top seller, or if the trends would be different in some states. Breaking the data down by state helps businesses understand local sales patterns and plan strategies or adjust operations based on what’s happening in each region.
+
+I calculated total sales for each category by state and used the RANK() function to identify the top-selling state for each category. This analysis highlights regional trends and the best-selling categories in different areas.
+
+```sql
+WITH sales_data AS (
+    SELECT 
+        SUBSTRING_INDEX(c.address, ",", -1) AS states,
+        p.category AS category,
+        SUM(oi.total_sales) AS total_sale
+    FROM orders o
+    JOIN customers c ON c.customer_id = o.customer_id
+    JOIN order_items oi ON oi.order_id = o.order_id
+    JOIN products p ON p.product_id = oi.product_id
+    GROUP BY p.category, states
+),
+ranked_data AS (
+    SELECT 
+        states,
+        category,
+        total_sale,
+        RANK() OVER (PARTITION BY states ORDER BY total_sale DESC) AS ranking
+    FROM sales_data
+)
+SELECT 
+    states,
+    category,
+    total_sale
+FROM ranked_data
+WHERE ranking = 1;
+
+```
+
+<img width="630" alt="Screenshot 2025-01-07 at 5 16 23 PM" src="https://github.com/user-attachments/assets/6246f219-6e7e-44a9-bdea-3e03835c8e58" />
 
 
+I wanted to see if electronics is the best-selling category in each state. As we can see, electronics is the top seller in most states, but there are some states, like Tennessee (TN), Wisconsin (WI), and West Virginia (WV), where Home & Kitchen is the best seller. This shows that while we are doing really well with electronics, there is a significant gap between it and other categories. If we don’t want the company to be overly reliant on electronics sales in the future, we may need to focus on increasing sales in other categories. In our business, the goal shouldn’t just be success in one specific category, but to achieve similar revenue across all categories.
