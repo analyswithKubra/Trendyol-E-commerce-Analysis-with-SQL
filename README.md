@@ -43,8 +43,8 @@ CREATE TABLE order_items (
     quantity INT,
     price_at_purchase DECIMAL(10,2),
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
+    FOREIGN KEY (product_id) REFERENCES products(product_id));
+
 ---
 ## 4. Data Cleaning Process
 Before diving into analysis, I ensured the data was clean, consistent, and ready for querying using SQL. Key steps included:- **Standardizing Text Data:** Ensured uniformity in columns like customer names and product categories using SQL functions such as `TRIM()` and `LOWER()`- **Removing Duplicates and Nulls:** Used SQL queries to identify and eliminate duplicate rows and handle missing values, maintaining data integrity.- **Validating Relationships:** Verified primary and foreign key relationships across tables using SQL to ensure accurate joins and referential integrity.
