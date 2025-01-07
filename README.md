@@ -21,7 +21,7 @@ The dataset for this project was sourced from Kaggle, available in CSV format. I
 
 These tables allowed me to explore various aspects of an e-commerce business, from customer interactions to product details, providing a comprehensive foundation for analysis.
 
----
+___
 
 ### 2. Data Modeling
 
