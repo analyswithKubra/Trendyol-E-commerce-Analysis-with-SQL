@@ -48,7 +48,7 @@ CREATE TABLE order_items (
 
 ---
 
-**Data Cleaning Process**
+**4.Data Cleaning Process**
 
 Before diving into analysis, I ensured the data was clean, consistent, and ready for querying using SQL. Key steps included:
 
@@ -57,9 +57,15 @@ Removing Duplicates and Nulls: Used SQL queries to identify and eliminate duplic
 Validating Relationships: Verified primary and foreign key relationships across tables using SQL to ensure accurate joins and referential integrity.
 Using SQL for data cleaning allowed for precision and efficiency, ensuring the dataset was ready for detailed analysis and strategic decision-making.
 
-5. Exploratory Data Analysis (EDA)
+---
+
+**5.Exploratory Data Analysis (EDA)**
 To become more familiar with the dataset and ensure its validity, I conducted exploratory data analysis (EDA). This involved:
 
 Reviewing distributions and summary statistics for key variables.
 Identifying potential outliers and inconsistencies.
 Validating data relationships to confirm the data aligns with business logic
+
+---
+
+
