@@ -173,3 +173,130 @@ WHERE ranking = 1;
 
 
 I wanted to see if electronics is the best-selling category in each state. As we can see, electronics is the top seller in most states, but there are some states, like Tennessee (TN), Wisconsin (WI), and West Virginia (WV), where Home & Kitchen is the best seller. This shows that while we are doing really well with electronics, there is a significant gap between it and other categories. If we don’t want the company to be overly reliant on electronics sales in the future, we may need to focus on increasing sales in other categories. In our business, the goal shouldn’t just be success in one specific category, but to achieve similar revenue across all categories.
+
+
+### 4.Top Selling Products 
+
+What are the top-selling products by total revenue, and how do these high-revenue products contribute to the company’s overall strategy? 
+
+So far, we have looked at general month-by-month sales and analyzed sales by category. Now, I want to dig a bit further and take a closer look at the data to identify the best-selling products. By identifying which products generate the most revenue, we can evaluate the success of the company’s product offerings, understand consumer demand, and uncover trends that can inform strategic decisions.
+
+```sql
+SELECT  
+    p.product_name AS product_name,  
+    COUNT(o.order_id) AS quantity_sold,  
+    SUM(oi.total_sales) AS total_sale  
+FROM  
+    order_items oi  
+JOIN  
+    orders o ON o.order_id = oi.order_id  
+JOIN  
+    products p ON p.product_id = oi.product_id  
+GROUP BY  
+    p.product_name  
+ORDER BY  
+    total_sale DESC  
+LIMIT 10;
+```
+<img width="578" alt="Screenshot 2025-01-07 at 7 54 35 PM" src="https://github.com/user-attachments/assets/8bd69ba0-4390-42ee-bf0b-e21640be2b69" />
+
+The 4k monitor, microphones, and standing desks are clearly hitting the mark with customers, showing strong demand for tech and productivity products. Household items like kitchen blenders and air purifiers are also steady performers, proving their ongoing appeal. The water bottle’s spot in the top 10 suggests there’s potential in high-volume or premium-priced items.
+
+These insights give us a clearer picture of what’s working, helping us focus on the right products for inventory and promotions. Moving forward, it’s important to keep a balance across different product categories to ensure steady growth and minimize over-reliance on just a few top sellers. This will allow us to make smarter decisions that benefit the business in the long run.
+
+
+
+### 5. Top 5 Suppliers and Their Contribution
+
+Who are the top 10 suppliers based on total sales value, and what percentage of the company’s total revenue do they contribute?
+
+We analyzed which products generate the most revenue to make informed decisions on pricing, stocking, and other product-related strategies. However, it's also crucial to consider our suppliers. As an e-commerce business, we source products from various suppliers to deliver to our customers.
+In this analysis, I identified the top 10 suppliers based on total sales and calculated their contribution to overall revenue. Understanding supplier contributions helps the business prioritize relationships with key suppliers driving the most sales.
+
+The query uses a Common Table Expression (CTE) to aggregate total sales per supplier and the company’s total sales, then calculates each supplier's contribution percentage using a CROSS JOIN.
+
+```sql
+WITH supplier_sales AS (
+    SELECT
+        s.supplier_id AS supplier_id,
+        s.supplier_name AS supplier_name,
+        SUM(oi.total_sales) AS total_sale
+    FROM products p
+    JOIN order_items oi ON oi.product_id = p.product_id
+    JOIN suppliers s ON s.supplier_id = p.supplier_id
+    GROUP BY s.supplier_id, s.supplier_name
+),
+total_sales AS (
+    SELECT SUM(total_sale) AS company_total_sales
+    FROM supplier_sales
+)
+SELECT
+    ss.supplier_id,
+    ss.supplier_name,
+    ss.total_sale,
+    (ss.total_sale * 100.0) / ts.company_total_sales AS contribution_percentage
+FROM supplier_sales ss
+CROSS JOIN total_sales ts
+ORDER BY ss.total_sale DESC
+LIMIT 10;
+
+```
+<img width="608" alt="Screenshot 2025-01-07 at 8 30 59 PM" src="https://github.com/user-attachments/assets/ccef2eef-4412-4eb5-957a-55bbc2e99ff5" />
+
+The results highlight the significant contribution of the top 10 suppliers to the company's revenue. Next Level Systems leads with a contribution of 1.3%, followed closely by Precision Suppliers LLC. Together, these suppliers contribute nearly 3% of the company’s total revenue, showcasing their importance to the supply chain.
+By understanding these contributions, the company can ensure strong partnerships with these key suppliers while exploring ways to optimize performance with others.
+
+
+
+### 6. Suppliers Below Average Sales in the Last 6 Months
+Which suppliers have made sales in the last 6 months but have total sales below the average of all suppliers during this period? How much are their sales below the average?
+
+We analyzed the top 10 suppliers by total sales to strengthen relationships with key suppliers. However, this analysis focuses on identifying suppliers who made sales in the last six months but fell below the average total sales during this period.
+
+By highlighting underperforming suppliers, the business can explore reasons for the decline, work with them to improve performance, or consider alternative options. The query calculates total sales over six months, compares them to the average, and identifies the shortfall for each supplier.
+
+```sql
+WITH sales_data AS (
+    SELECT 
+        s.supplier_id AS supplier_id,
+        s.supplier_name AS supplier_name,
+        MAX(o.order_date) AS last_sale_date,
+        SUM(oi.quantity * oi.price_at_purchase) AS total_sales
+    FROM suppliers s
+    LEFT JOIN products p ON s.supplier_id = p.supplier_id
+    LEFT JOIN order_items oi ON p.product_id = oi.product_id
+    LEFT JOIN orders o ON oi.order_id = o.order_id
+    WHERE o.order_date >= DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH) -- Filter for last 6 months
+    GROUP BY s.supplier_id, s.supplier_name
+),
+avg_sales AS (
+    SELECT AVG(total_sales) AS avg_total_sale 
+    FROM sales_data
+)
+SELECT 
+    sd.supplier_id,
+    sd.supplier_name,
+    sd.last_sale_date,
+    FORMAT(avg.avg_total_sale - sd.total_sales, 2) AS sales_difference
+FROM sales_data sd
+CROSS JOIN avg_sales avg 
+WHERE sd.total_sales < avg.avg_total_sale
+ORDER BY (avg.avg_total_sale - sd.total_sales) DESC
+LIMIT 10;    
+```
+<img width="594" alt="Screenshot 2025-01-07 at 8 38 58 PM" src="https://github.com/user-attachments/assets/bec7518b-0aa3-4629-ab6e-aee02ddb4f31" />
+
+As you can see, Tech Supplies Inc. shows the largest gap below the average. Unified Trading Co. and Global Goods Ltd. also have significant gaps, indicating opportunities for improvement.
+By analyzing these gaps, the business can assess whether these suppliers face challenges like low demand, operational issues, or competitive pressure. Addressing these factors could improve supplier performance and strengthen their contributions to overall revenue.
+
+
+
+
+
+
+
+
+
+
+
+
