@@ -454,6 +454,16 @@ In conclusion, this data-driven approach connects raw information to strategic b
 
 
 
+**Author - Kubra DIZLEK**
 
+This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
+
+Stay Updated and Join the Community
+
+To stay updated on SQL, data analysis, and related insights, follow me on social media:
+
+**LinkedIn:** Connect with me professionally.
+**ORCID:** Connect for a unique research identifier.
+I appreciate your support and am excited to connect with you!
 
 
