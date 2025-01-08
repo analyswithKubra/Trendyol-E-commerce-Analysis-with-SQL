@@ -463,5 +463,7 @@ Stay Updated and Join the Community
 To stay updated on SQL, data analysis, and related insights, follow me on social media:
 
 **LinkedIn:** Connect with me professionally.
+
 **ORCID:** Connect for a unique research identifier.
+
 I appreciate your support and am excited to connect with you!
