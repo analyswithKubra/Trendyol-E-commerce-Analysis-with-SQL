@@ -66,7 +66,7 @@ To ensure the dataset was accurate, consistent, and analysis-ready, I performed 
 ### Data Analysis 
 In this step, I focused on answering key business questions based on industry challenges and my experience. These questions, queries, and analyses aim to help the business grow, address problem areas, identify top and bottom-performing product categories and suppliers, and understand customer behavior. This information enables informed decisions on investments and other actions. Here are the questions, queries, and analyses:
 
-### 1.Month Over Month Sales Trend 
+### 1. Month Over Month Sales Trend 
  To have a general idea about monthly revenue, I wanted to analyze month-over-month sales trends for the last 12 months. I calculated the total sales for each month and used the LAG window function to retrieve sales data from the previous month. This approach highlights fluctuations in sales performance over time, helping to identify growth or decline patterns.!
 
 ```sql
@@ -106,7 +106,7 @@ The data shows a sharp increase in December 2023, likely due to holiday shopping
 
 
 
-### 2.Revenue By Category 
+### 2. Revenue By Category 
 
 How does each product category contribute to the company's total revenue?
 
@@ -132,7 +132,7 @@ As we can see, **Electronics** is the top-performing category, contributing 35.8
 **Accessories,** contributing 23.14%, shows consistent performance, likely from smaller, high-volume items. Compared to other categories, **Furniture** has the smallest share at 14.66%, though it still contributes to diversifying revenue streams.
 
 
-### 3.Best-Selling Categories by State
+### 3. Best-Selling Categories by State
 
 Which state generates the highest revenue for each product category, and how much is the total sales within that state?
 
@@ -175,7 +175,7 @@ WHERE ranking = 1;
 I wanted to see if electronics is the best-selling category in each state. As we can see, electronics is the top seller in most states, but there are some states, like Tennessee (TN), Wisconsin (WI), and West Virginia (WV), where Home & Kitchen is the best seller. This shows that while we are doing really well with electronics, there is a significant gap between it and other categories. If we don’t want the company to be overly reliant on electronics sales in the future, we may need to focus on increasing sales in other categories. In our business, the goal shouldn’t just be success in one specific category, but to achieve similar revenue across all categories.
 
 
-### 4.Top Selling Products 
+### 4. Top Selling Products 
 
 What are the top-selling products by total revenue, and how do these high-revenue products contribute to the company’s overall strategy? 
 
@@ -290,9 +290,158 @@ As you can see, Tech Supplies Inc. shows the largest gap below the average. Unif
 By analyzing these gaps, the business can assess whether these suppliers face challenges like low demand, operational issues, or competitive pressure. Addressing these factors could improve supplier performance and strengthen their contributions to overall revenue.
 
 
+### 7. Customer Lifetime Value 
+
+Which customers have the highest lifetime value, and how can we rank them based on their total contributions to the company?
+ 
+So far, we have focused on total numbers by month, category, and product perspective, and we’ve analyzed the best and worst suppliers. Moving forward, we will delve deeper into customer behavior to provide actionable insights.
+
+To begin, we analyzed customer behavior by calculating the average order value. Additionally, I calculated the total value of orders placed by each customer over their lifetime, a metric known as Customer Lifetime Value (CLTV). This analysis highlights the customers who contribute the most to overall revenue. By using the DENSE_RANK() window function, I ranked customers based on their CLTV, enabling the company to identify high-value customers and prioritize them for loyalty programs, personalized marketing, and exclusive promotions.
+
+```sql
+SELECT 
+    o.customer_id AS customer_id,
+    CONCAT(c.first_name, " ", c.last_name) AS customer_name,
+    FORMAT(SUM(oi.total_sales), 0) AS customer_lifetime_value,
+    DENSE_RANK() OVER (ORDER BY SUM(oi.total_sales) DESC) AS customer_rank
+FROM 
+    orders o
+JOIN 
+    order_items oi ON oi.order_id = o.order_id
+JOIN 
+    customers c ON c.customer_id = o.customer_id
+GROUP BY 
+    o.customer_id, c.first_name, c.last_name
+ORDER BY 
+    customer_rank ASC
+LIMIT 20;
+```
+
+<img width="666" alt="Screenshot 2025-01-07 at 8 57 09 PM" src="https://github.com/user-attachments/assets/a550ccce-544b-4b9d-b70d-5ccaefb67c5e" />
+
+**Brandy Beck** ranks as the customer with the highest lifetime value, contributing **$19,651** in total sales. This ranking provides insights into customer contributions, enabling the company to identify its most loyal and profitable customers. Understanding these high-value customers allows the business to craft targeted retention strategies, fostering long-term relationships that drive future growth.
 
 
 
+### 8. Customers with No Purchases
+Who are the customers that registered but did not make any purchases?
+ 
+To identify customers who registered but did not place any orders, I used a combination of a LEFT JOIN and a NOT IN clause. The LEFT JOIN ensures that all customers are included in the result set, regardless of whether they made a purchase or not. The NOT IN condition filters out customers who appear in the orders table, leaving only those who have registered but have not made any transactions. This helps pinpoint inactive customers, enabling the company to strategize ways to re-engage them.
+ 
+```sql
+SELECT 
+    c.customer_id AS customer_id,
+    CONCAT(c.first_name, " ", c.last_name) AS customer_name
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+WHERE c.customer_id NOT IN (
+    SELECT customer_id 
+    FROM orders
+)
+GROUP BY customer_id, customer_name
+
+UNION 
+
+SELECT 
+    'N/A' AS customer_id,
+    'N/A' AS customer_name
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM customers c
+    LEFT JOIN orders o ON c.customer_id = o.customer_id
+    WHERE c.customer_id NOT IN (
+        SELECT customer_id 
+        FROM orders
+    )
+);
+```
+
+<img width="330" alt="Screenshot 2025-01-07 at 9 01 33 PM" src="https://github.com/user-attachments/assets/41836ad8-ca8e-439a-b4d2-53ad82b16803" />
+
+The query results indicate no inactive customers in the dataset. This means every registered customer has completed at least one purchase. While this is a positive finding, it’s important to continue monitoring customer engagement levels to ensure all users remain active and satisfied.
+
+### 9.Shipment Delays Analysis 
+
+What is the average time taken (in days) for shipments to be processed after an order is placed, and how many shipments took 3 or more days to ship?
+
+We have analyzed customer behaviors so far. Now, I want to analyze something related to shipping performance. I believe shipping is one of the most important factors affecting customer behavior, especially when analyzing e-commerce businesses. According to our business, if the shipping takes more than 3 days after the order is completed, it is considered a shipping delay. To analyze this, I used DATEDIFF() to calculate the days between the order_date and shipment_date. Additionally, I included shipment companies to gain a general understanding of their performance as well.
+
+```sql
+
+SELECT 
+  s.shipment_id AS shipment_id,
+  CONCAT(c.first_name, " ", c.last_name) AS customer,
+  o.order_date AS order_date,
+  s.shipment_date AS shipment_date,
+  DATEDIFF(s.shipment_date, o.order_date) AS shipment_days,
+  s.carrier
+FROM shipment s
+JOIN orders o ON o.order_id = s.order_id
+JOIN customers c ON c.customer_id = o.customer_id
+GROUP BY s.shipment_id, c.first_name, c.last_name, o.order_date, s.shipment_date, s.carrier
+HAVING shipment_days >= 3;
+
+```
+<img width="868" alt="Screenshot 2025-01-07 at 9 18 31 PM" src="https://github.com/user-attachments/assets/1c697ac1-f0b2-4752-9a0e-48de58565d99" />
+
+By analyzing shipping delays, we can assess our shipping performance. As mentioned, shipping performance is a significant factor that affects customers and can even be a major reason for customer churn or retention. We can further analyze the delayed shipping percentage relative to total shipments, or we can examine delays by state to identify if certain states experience more delays than others. Additionally, we can analyze shipping performance by shipping company to pinpoint the main reasons for delays. These analyses provide a general perspective, but we definitely need to explore further and look at the issue from different angles
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 10. Payment Success Rate
+What is the percentage of successful payments across all orders, and how do payment success rates vary by payment method and transaction month?
+ 
+So far, we have analyzed various aspects such as categories, products, customer behavior, and shipping delays. To further assess our payment performance, I focused on transaction data to calculate the percentage of successful payments across all orders. This analysis includes a breakdown by payment status, method, and transaction month. Using the WITH clause and advanced window functions like SUM() OVER, I was able to compute both overall status percentages and monthly trends, offering deeper insights. This analysis helps the company monitor payment reliability, detect evolving trends, and assess the performance of different payment methods.
+ 
+```sql
+WITH payment_summary AS (
+    SELECT 
+        p.transaction_status,
+        p.payment_method,
+        DATE_FORMAT(o.order_date, '%Y-%m') AS transaction_month,
+        COUNT(p.payment_id) AS payment_count,
+        SUM(p.amount) AS total_amount
+    FROM payment p
+    JOIN orders o ON p.order_id = o.order_id
+    GROUP BY p.transaction_status, p.payment_method, transaction_month
+),
+payment_percentage AS (
+    SELECT 
+        transaction_status,
+        payment_method,
+        transaction_month,
+        payment_count,
+        total_amount,
+        (payment_count * 100.0) / SUM(payment_count) OVER () AS overall_status_percentage,
+        (payment_count * 100.0) / SUM(payment_count) OVER (PARTITION BY transaction_month) AS monthly_status_percentage
+    FROM payment_summary
+)
+SELECT 
+    transaction_status,
+    payment_method,
+    transaction_month,
+    payment_count,
+    total_amount,
+    overall_status_percentage,
+    monthly_status_percentage
+FROM payment_percentage
+ORDER BY transaction_month ASC, overall_status_percentage DESC;
+  
+```
+<img width="993" alt="Screenshot 2025-01-07 at 9 05 51 PM" src="https://github.com/user-attachments/assets/b19377f2-e4e7-468b-a247-fd79c2239192" />
+
+
+The percentage of successful payments provides insight into how reliable the company’s payment systems are. A high success rate suggests operational efficiency, while failed transactions might highlight issues like payment gateway errors or declined cards. By analyzing monthly success rates, the company can identify seasonal patterns or technical issues specific to certain months, such as increased failures during peak periods like holidays. Evaluating payment methods like credit cards, debit cards, and PayPal helps pinpoint methods with higher failure rates. This allows the company to negotiate with providers or improve customer instructions for specific methods.
 
 
 
