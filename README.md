@@ -1,7 +1,4 @@
-# Trendyol E-Commerce Analysis: Insights for Growth
-
-Note: This overview provides detailed insights and recommendations. If you wish to view only the SQL queries used in the analysis, please click.
-sql queries.
+# Trendyol E-Commerce Analysis: Insights for Growt
 
 
 
