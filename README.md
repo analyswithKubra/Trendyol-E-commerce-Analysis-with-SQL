@@ -1,5 +1,9 @@
 # Trendyol E-Commerce Analysis: Insights for Growth
 
+Note: This overview provides detailed insights and recommendations. If you wish to view only the SQL queries used in the analysis, please click SQL Queries.
+
+
+
 ### Project Overview 
 In the fast-paced world of e-commerce, staying ahead means making decisions backed by data. This project dives into a simulated dataset inspired by real-world operations to uncover what drives growth and efficiency. By examining product trends, customer behaviors, and operational performance, the goal is to transform raw data into strategies that matter. As well as providing value to the business and my fellows, this project demonstrates my understanding of both technical and business needs, connecting the dots between raw data and strategic decisions.
 Note:This overview cover detailed insights and rfecommendations.If you want to see only queries please click SQL Queries
