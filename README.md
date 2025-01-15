@@ -2,6 +2,7 @@
 
 ### Project Overview 
 In the fast-paced world of e-commerce, staying ahead means making decisions backed by data. This project dives into a simulated dataset inspired by real-world operations to uncover what drives growth and efficiency. By examining product trends, customer behaviors, and operational performance, the goal is to transform raw data into strategies that matter. As well as providing value to the business and my fellows, this project demonstrates my understanding of both technical and business needs, connecting the dots between raw data and strategic decisions.
+Note:This overview cover detailed insights and rfecommendations.If you want to see only queries please click SQL Queries
 
 ### Data Gathering 
 I sourced the dataset for this project from Kaggle, where it is available in a CSV format. The dataset is simulated and inspired by real-world e-commerce operations. It contains 8 interconnected tables:
