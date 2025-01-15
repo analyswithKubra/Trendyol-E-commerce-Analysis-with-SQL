@@ -1,4 +1,4 @@
-# Trendyol E-Commerce Analysis: Insights for Growt
+# Trendyol E-Commerce Analysis: Insights for Growth
 
 
 
