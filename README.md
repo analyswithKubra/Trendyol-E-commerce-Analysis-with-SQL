@@ -1,6 +1,7 @@
 # Trendyol E-Commerce Analysis: Insights for Growth
 
-Note: This overview provides detailed insights and recommendations. If you wish to view only the SQL queries used in the analysis, please click SQL Queries.
+Note: This overview provides detailed insights and recommendations. If you wish to view only the SQL queries used in the analysis, please click [SQL Queries](https://github.com/analyswithKubra/Trendyol-E-commerce-Analysis-with-SQL/blob/main/sql%20queries.sql).
+
 
 
 
