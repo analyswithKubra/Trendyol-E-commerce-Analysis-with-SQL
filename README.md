@@ -459,7 +459,7 @@ In conclusion, this data-driven approach connects raw information to strategic b
 
 
 
-## Files and Folders
+### Files and Folders
 
 - **[collaboration.md](collaboration.md)**  
   *Please click if you want to collaborate with me. This file outlines how you can contribute and includes my contact information.*
