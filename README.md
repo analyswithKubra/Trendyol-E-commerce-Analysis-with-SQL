@@ -458,16 +458,34 @@ In conclusion, this data-driven approach connects raw information to strategic b
 
 
 
-**Author - Kubra DIZLEK**
 
-This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
+## Files and Folders
 
-Stay Updated and Join the Community
+- **[collaboration.md](collaboration.md)**  
+  *Please click if you want to collaborate with me. This file outlines how you can contribute and includes my contact information.*
 
-To stay updated on SQL, data analysis, and related insights, follow me on social media:
+- **[sql queries](sql%20queries)**  
+  *Please click if you want to see only the SQL queries used in the analysis.*
 
-**LinkedIn:** Connect with me professionally.
+- **[business questions.md](business%20questions.md)**  
+  *Please click if you want to explore the key business questions driving the analysis.*
 
-**ORCID:** Connect for a unique research identifier.
+- **[database ER diagram (crow's foot)](database%20ER%20diagram%20(crow's%20foot))**  
+  *Contains the Entity-Relationship diagram that explains the structure of the database.*
 
-I appreciate your support and am excited to connect with you!
+- **[development plans.md](development%20plans.md)**  
+  *Lists future development plans and enhancements for the project.*
+
+- **[fqa.md](fqa.md)**  
+  *Frequently asked questions about the project.*
+
+- **[learnings.md](learnings.md)**  
+  *Documents the key learnings and insights gained during the analysis.*
+
+- **[license.md](license.md)**  
+  *Includes the license details for this project.*
+
+---
+
+Feel free to click on any file to learn more about the project components. For questions or collaboration, check out `collaboration.md` or reach out to me directly!
+
