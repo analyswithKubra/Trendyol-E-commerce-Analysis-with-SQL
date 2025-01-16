@@ -1,29 +1,53 @@
-1,Month Over Month Sales Trend:
+## Business Qestions
+
+**1. Month Over Month Sales Trend**
+
 How can I analyze the month-over-month sales trend to identify changes in sales performance over time?
 
-2.Revenue By Category:
+
+**2. Revenue By Category**
+
 How can I calculate the total revenue and percentage contribution of each product category?
 
-3.Best-Selling Categories by State:
+
+**3. Best-Selling Categories by State**
+
 Which state generates the highest revenue for each product category, and what is the total sales within that state?
 
-4.Top-Selling Products:
-What are the top-selling products by total revenue, and how do these high-revenue products contribute to the company’s overall strategy?
 
-5.Top 5 Suppliers and Their Contribution:
+
+**4. Top-Selling Products**
+
+What are the top-selling products by total revenue, and how do these high-revenue products contribute to
+
+
+**5. Top 5 Suppliers and Their Contribution**
+
 Who are the top 10 suppliers based on total sales value, and what percentage of the company’s total revenue do they contribute?
 
-6.Suppliers Below Average Sales in the Last 6 Months:
+
+**6. Suppliers Below Average Sales in the Last 6 Months**
+
 Which suppliers have made sales in the last 6 months but have total sales below the average of all suppliers during this period? How much are their sales below the average?
 
-7.Customer Lifetime Value:
+
+**7. Customer Lifetime Value**
+
 Which customers have the highest lifetime value, and how can we rank them based on their total contributions to the company?
 
-8.Customers with No Purchases:
+
+
+**8. Customers with No Purchases**
+
 Who are the customers that registered but did not make any purchases?
 
-9.Shipment Delays Analysis:
+
+
+**9. Shipment Delays Analysis**
+
 What is the average time taken (in days) for shipments to be processed after an order is placed, and how many shipments took 3 or more days to ship?
 
-10.Payment Success Rate:
+
+**10. Payment Success Rate**
+
 What is the percentage of successful payments across all orders, and how do payment success rates vary by payment method and transaction month?
