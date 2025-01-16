@@ -51,3 +51,4 @@ What is the average time taken (in days) for shipments to be processed after an 
 **10. Payment Success Rate**
 
 What is the percentage of successful payments across all orders, and how do payment success rates vary by payment method and transaction month?
+
