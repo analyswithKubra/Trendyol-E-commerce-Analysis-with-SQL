@@ -2,7 +2,7 @@
 
 **1. Month Over Month Sales Trend**
 
-How can I analyze the month-over-month sales trend to identify changes in sales performance over time?
+How do month-over-month sales trends highlight key growth or decline patterns, and what strategic actions can be taken during periods of fluctuation to optimize revenue?
 
 
 **2. Revenue By Category**
