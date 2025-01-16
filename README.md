@@ -1,5 +1,6 @@
 # Trendyol E-Commerce Analysis: Insights for Growth
 
+![trendyol 3](https://github.com/user-attachments/assets/f59bdb30-5e82-4c80-b084-a17306253fb7)
 
 
 
