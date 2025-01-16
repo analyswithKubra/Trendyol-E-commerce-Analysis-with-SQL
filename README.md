@@ -1,7 +1,8 @@
+![trendyol 2](https://github.com/user-attachments/assets/d4eaeffc-477f-4a15-9e03-7347d76fc0f9)
+
+
+
 # Trendyol E-Commerce Analysis: Insights for Growth
-
-![trendyol 3](https://github.com/user-attachments/assets/f59bdb30-5e82-4c80-b084-a17306253fb7)
-
 
 
 ### Project Overview 
