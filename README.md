@@ -449,7 +449,7 @@ The percentage of successful payments provides insight into how reliable the com
 
 
 
-#### Conclusion 
+### Conclusion 
 This project has provided a comprehensive analysis of Trendyol's simulated e-commerce operations, leveraging key data points to drive strategic decision-making. From sales trends and customer behavior to supplier performance and shipping efficiency, the findings have highlighted numerous opportunities for growth and optimization.
 
 While the analysis has given valuable insights, there is potential to further delve into each of the key areas for even more specific decisions. By examining deeper facets such as customer segments, regional preferences, and product-specific trends, Trendyol can make more targeted improvements. Continuous monitoring and fine-tuning of these areas will help in staying competitive and driving profitability.
