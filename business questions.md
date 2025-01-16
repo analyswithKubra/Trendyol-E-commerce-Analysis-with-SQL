@@ -7,7 +7,7 @@ How do month-over-month sales trends highlight key growth or decline patterns, a
 
 **2. Revenue By Category**
 
-How can I calculate the total revenue and percentage contribution of each product category?
+How does each product category contribute to the company's total revenue?
 
 
 **3. Best-Selling Categories by State**
