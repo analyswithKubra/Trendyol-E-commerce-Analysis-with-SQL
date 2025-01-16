@@ -11,7 +11,7 @@ The dataset is included in this repository for easy replication and testing of S
 
 ### 3. **What kind of questions does this project address?**
 This project addresses various business-related questions, such as:
-   - [Example Question 1: Which products generate the most revenue?]
+   - [Example Question 1: How does each product category contribute to the company's total revenue?]
    - [Example Question 2: What are the monthly sales trends?]
    - [Example Question 3: How do customer demographics influence purchasing behavior?]
 
