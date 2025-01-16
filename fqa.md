@@ -4,9 +4,8 @@
 The goal of this project is to answer key business questions using SQL queries. By analyzing the dataset, we provide actionable insights that can help businesses make data-driven decisions.
 
 ### 2. **What dataset is used in this project?**
-The dataset contains comprehensive e-commerce data, including customer information, orders, products, payments, and more. It was sourced from [Kaggle](https://www.kaggle.com), and the data is structured to represent a real-world relational database.
+The dataset contains comprehensive e-commerce data, including customer information, orders, products, payments, and more. It was sourced from Kaggle, and the data is structured to represent a real-world relational database.
 
-**Dataset Link:** [Dataset Name Here](https://www.kaggle.com/your-dataset-link)
 
 The dataset is included in this repository for easy replication and testing of SQL queries.
 
