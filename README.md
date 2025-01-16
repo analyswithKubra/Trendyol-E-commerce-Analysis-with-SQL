@@ -475,8 +475,8 @@ In conclusion, this data-driven approach connects raw information to strategic b
 - **[database ER diagram (crow's foot)](database%20ER%20diagram%20(crow's%20foot))**  
   *Contains the Entity-Relationship diagram that explains the structure of the database.*
 
-- **[development plans.md](development%20plans.md)**  
-  *Lists future development plans and enhancements for the project.*
+- **[development plans.md](https://github.com/analyswithKubra/Trendyol-E-commerce-Analysis-with-SQL/blob/main/devolopment%20plans.md)**  
+  Lists future development plans and enhancements for the project.
 
 - **[fqa.md](fqa.md)**  
   *Frequently asked questions about the project.*
