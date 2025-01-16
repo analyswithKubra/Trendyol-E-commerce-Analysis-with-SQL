@@ -485,6 +485,10 @@ In conclusion, this data-driven approach connects raw information to strategic b
 - **[license.md](license.md)**  
   *Includes the license details for this project.*
 
+- **[dataset/](dataset/)**  
+  *Download the dataset used for the analysis. This folder contains all the raw and cleaned data files.*
+
+
 ---
 
 Feel free to click on any file to learn more about the project components. For questions or collaboration, check out `collaboration.md` or reach out to me directly!
